@@ -2,7 +2,9 @@ import styled from 'styled-components'
 
 import { Props } from '.'
 
-export const Card = styled.div<Props>`
+type PropsNoCounterAndLabel = Omit<Props, 'counter' | 'label'>
+
+export const Card = styled.div<PropsNoCounterAndLabel>`
   padding: 8px;
   border: 1px solid ${(props) => (props.isActive ? '#1E90FF' : 'none')};
   background-color: ${(props) => (props.isActive ? '#fff' : '#fcfcfc')};
