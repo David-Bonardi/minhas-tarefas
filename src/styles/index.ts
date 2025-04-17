@@ -1,6 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components'
 
-const EstiloGlobal = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
   *{
     margin: 0;
     padding: 0;
@@ -14,4 +14,4 @@ export const Container = styled.div`
   grid-template-columns: 224px auto;
 `
 
-export default EstiloGlobal
+export default GlobalStyle
