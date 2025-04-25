@@ -5,14 +5,21 @@ import { RootReducer } from '../../store'
 
 const TodoList = () => {
   const { items } = useSelector((state: RootReducer) => state.tasks)
+  const { term } = useSelector((state: RootReducer) => state.filter)
+
+  const filterTasks = () => {
+    return items.filter(
+      (item) => item.title.toLowerCase().search(term.toLowerCase()) >= 0
+    )
+  }
 
   return (
     <Container>
       <p>
-        2 tarefas marcadas como: &quot;categoria&ldquo; e &quot;termo&ldquo;
+        2 tarefas marcadas como: &quot;categoria&ldquo; e &quot;{term}&ldquo;
       </p>
       <ul>
-        {items.map((t) => (
+        {filterTasks().map((t) => (
           <li key={t.title}>
             <Task
               id={t.id}
