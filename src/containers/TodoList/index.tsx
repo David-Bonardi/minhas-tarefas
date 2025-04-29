@@ -1,25 +1,53 @@
 import { useSelector } from 'react-redux'
 import Task from '../../components/Task'
-import { Container } from './styles'
+import { Container, SearchResult } from './styles'
 import { RootReducer } from '../../store'
 
 const TodoList = () => {
   const { items } = useSelector((state: RootReducer) => state.tasks)
-  const { term } = useSelector((state: RootReducer) => state.filter)
+  const { term, criterion, value } = useSelector(
+    (state: RootReducer) => state.filter
+  )
 
   const filterTasks = () => {
-    return items.filter(
-      (item) => item.title.toLowerCase().search(term.toLowerCase()) >= 0
-    )
+    let tasksFiltered = items
+
+    if (term !== undefined) {
+      tasksFiltered = tasksFiltered.filter(
+        (item) => item.title.toLowerCase().search(term.toLowerCase()) >= 0
+      )
+    }
+    if (criterion === 'prioridade') {
+      tasksFiltered = tasksFiltered.filter((item) => item.priority === value)
+    } else if (criterion === 'status') {
+      tasksFiltered = tasksFiltered.filter((item) => item.status === value)
+    } else {
+      return items
+    }
+
+    return tasksFiltered
   }
+
+  const showFilterResults = (quantity: number) => {
+    let message = ''
+    const complementation =
+      term !== undefined && term.length > 0 ? `e "${term}"` : ''
+    if (criterion === 'todas') {
+      message = `${quantity} tarefa(s) marcada(s) como: todas ${complementation}`
+    } else {
+      message = `${quantity} tarefa(s) marcada(s) como: "${value}" ${complementation}`
+    }
+    return message
+  }
+
+  const tasks = filterTasks()
+  const message = showFilterResults(tasks.length)
 
   return (
     <Container>
-      <p>
-        2 tarefas marcadas como: &quot;categoria&ldquo; e &quot;{term}&ldquo;
-      </p>
+      <SearchResult>{message}</SearchResult>
       <ul>
-        {filterTasks().map((t) => (
+        {tasks.map((t) => (
           <li key={t.title}>
             <Task
               id={t.id}

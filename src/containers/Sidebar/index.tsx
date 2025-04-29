@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
 import CardFilter from '../../components/CardFilter'
 
-import * as S from './styles'
 import { RootReducer } from '../../store'
 import { changeTerm } from '../../store/reducers/filter'
+import * as S from './styles'
+import * as enums from '../../utils/enums/Task'
 
 const Sidebar = () => {
   const dispatch = useDispatch()
@@ -19,12 +20,32 @@ const Sidebar = () => {
           onChange={(event) => dispatch(changeTerm(event.target.value))}
         />
         <S.Filters>
-          <CardFilter label="Pendentes" counter={3} />
-          <CardFilter label="Concluídas" counter={4} />
-          <CardFilter label="Urgentes" counter={2} />
-          <CardFilter label="Importantes" counter={2} />
-          <CardFilter label="Normal" counter={3} />
-          <CardFilter label="Todas" counter={7} isActive />
+          <CardFilter
+            value={enums.Status.PENDENT}
+            criterion="status"
+            label="Pendentes"
+          />
+          <CardFilter
+            value={enums.Status.DONE}
+            criterion="status"
+            label="Concluídas"
+          />
+          <CardFilter
+            value={enums.Priority.URGENT}
+            criterion="prioridade"
+            label="Urgentes"
+          />
+          <CardFilter
+            value={enums.Priority.IMPORTANT}
+            criterion="prioridade"
+            label="Importantes"
+          />
+          <CardFilter
+            value={enums.Priority.NORMAL}
+            criterion="prioridade"
+            label="Normal"
+          />
+          <CardFilter criterion="todas" label="Todas" />
         </S.Filters>
       </div>
     </S.Aside>

@@ -28,6 +28,13 @@ const initialState: TasksState = {
       priority: enums.Priority.NORMAL,
       status: enums.Status.DONE,
       title: 'Estudar HTML'
+    },
+    {
+      id: 4,
+      description: 'ver a aula 2',
+      priority: enums.Priority.URGENT,
+      status: enums.Status.PENDENT,
+      title: 'Estudar Derived State'
     }
   ]
 }
@@ -45,10 +52,13 @@ const tasksSlice = createSlice({
       if (taskIndex >= 0) {
         state.items[taskIndex] = action.payload
       }
+    },
+    add: (state, action: PayloadAction<Task>) => {
+      state.items.push(action.payload)
     }
   }
 })
 
-export const { remover, edit } = tasksSlice.actions
+export const { remover, edit, add } = tasksSlice.actions
 
 export default tasksSlice.reducer
