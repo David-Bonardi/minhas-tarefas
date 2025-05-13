@@ -4,6 +4,7 @@ import CardFilter from '../../components/CardFilter'
 import { RootReducer } from '../../store'
 import { changeTerm } from '../../store/reducers/filter'
 import * as S from './styles'
+import { Search } from '../../styles'
 import * as enums from '../../utils/enums/Task'
 
 const Sidebar = () => {
@@ -13,7 +14,7 @@ const Sidebar = () => {
   return (
     <S.Aside>
       <div>
-        <S.Search
+        <Search
           type="text"
           placeholder="Buscar"
           value={term}

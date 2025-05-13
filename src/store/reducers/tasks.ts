@@ -54,7 +54,16 @@ const tasksSlice = createSlice({
       }
     },
     add: (state, action: PayloadAction<Task>) => {
-      state.items.push(action.payload)
+      const taskExists = state.items.find(
+        (task) =>
+          task.title.toLowerCase() === action.payload.title.toLowerCase()
+      )
+
+      if (taskExists) {
+        alert('A tarefa já existe')
+      } else {
+        state.items.push(action.payload)
+      }
     }
   }
 })

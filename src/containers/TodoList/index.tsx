@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import Task from '../../components/Task'
-import { Container, SearchResult } from './styles'
+import { MainContainer, Title } from '../../styles/index'
 import { RootReducer } from '../../store'
 
 const TodoList = () => {
@@ -44,8 +44,8 @@ const TodoList = () => {
   const message = showFilterResults(tasks.length)
 
   return (
-    <Container>
-      <SearchResult>{message}</SearchResult>
+    <MainContainer>
+      <Title as="p">{message}</Title>
       <ul>
         {tasks.map((t) => (
           <li key={t.title}>
@@ -59,7 +59,7 @@ const TodoList = () => {
           </li>
         ))}
       </ul>
-    </Container>
+    </MainContainer>
   )
 }
 
